@@ -23,7 +23,7 @@ import org.testng.annotations.Test;
 
 public class TestCases {
     ChromeDriver driver;
-    WebDriverWait wait;
+    
     String url="http://www.flipkart.com";
     /*
      * TODO: Write your tests here with testng @Test annotation. 
@@ -31,6 +31,7 @@ public class TestCases {
      */
     @Test
     public void testCase01() throws InterruptedException{
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
         System.out.println("start of testCase01");
         driver.get("http://www.flipkart.com/");
         WebElement searchBox= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='text']")));
@@ -40,9 +41,10 @@ public class TestCases {
         //System.out.println(searchBox.getDomAttribute("value").contains("Washing Machine"));
         // Actions actions = new Actions(driver);
         // actions.sendKeys(searchBox, "iPhone").sendKeys(Keys.ENTER).build().perform();
-
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='Popularity']")));
         WebElement popularitySort= wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='Popularity']")));
         popularitySort.click();
+        Thread.sleep(1000);
         List<WebElement> productRatings=wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@class='_75nlfW']")));
         int sumOfPdtwithLessThanFourRating=0;
         for(WebElement pr:productRatings){
@@ -62,20 +64,21 @@ public class TestCases {
     }
 
     @Test
-    public void testCase02(){
+    public void testCase02() throws InterruptedException{
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
         System.out.println("start of testCase02");
         driver.get("http://www.flipkart.com/");
         driver.navigate().refresh();
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='text']")));
         WebElement searchBox= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='text']")));
-        searchBox.sendKeys("iphone");
+        searchBox.sendKeys("iPhone");
         searchBox.sendKeys(Keys.ENTER);
         //System.out.println(searchBox.getDomAttribute("value").contains("iphone"));
         // Actions actions = new Actions(driver);
         // actions.sendKeys(searchBox, "iPhone").sendKeys(Keys.ENTER).build().perform();
-
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@class='_75nlfW']")));
         List<WebElement> productList=wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@class='_75nlfW']")));
-    
+        Thread.sleep(1000);
         for(WebElement pr:productList){
             //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//div[@class='UkUFwK' and text()]")));
             WebElement discountPercentage=pr.findElement(By.xpath(".//div[@class='UkUFwK']"));
@@ -85,11 +88,13 @@ public class TestCases {
                 System.out.println(productTitle.getText()+" "+discountPercentage.getText());
             }
         }
+        Thread.sleep(1000);
         System.out.println("end of testCase02");
     }
 
     @Test
     public void testCase03() throws InterruptedException{
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
         System.out.println("start of testCase03");
         driver.get("http://www.flipkart.com/");
         driver.navigate().refresh();
@@ -101,7 +106,7 @@ public class TestCases {
         // Actions actions = new Actions(driver);
         // actions.sendKeys(searchBox, "iPhone").sendKeys(Keys.ENTER).build().perform();
 
-
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='4★ & above']")));
         WebElement fournAboveFilter= wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='4★ & above']")));
         fournAboveFilter.click();
         Thread.sleep(3000);
@@ -149,7 +154,7 @@ public class TestCases {
                 System.out.println("Reviews: " + product.getReviews());
                 System.out.println("---------------");
             }
-
+            Thread.sleep(1000);
             
     }
      
@@ -177,7 +182,7 @@ public class TestCases {
         driver = new ChromeDriver(options);
 
         driver.manage().window().maximize();
-        wait=new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
         
     }
 
