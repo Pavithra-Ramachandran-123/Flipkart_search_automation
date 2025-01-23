@@ -23,22 +23,31 @@ This project automates the Flipkart website to extract information about various
 ## Test Cases
 
 ### testCase01: Search "Washing Machine" and count items with a rating of 4 stars or less
+
 Go to www.flipkart.com.
+
 Search for "Washing Machine".
+
 Sort the results by popularity.
+
 Print the count of items with a rating of 4 stars or below.
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 ### testCase02: Search "iPhone" and print titles and discount percentage
+
 Search for "iPhone".
+
 Print the product titles and discount percentage for items that have a discount greater than 17%.
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 ### testCase03: Search "Coffee Mug" with 4 stars and above, and print the Title and image URL of the 5 items with the highest number of reviews
+
 Search for "Coffee Mug".
+
 Filter the results to show items with 4 stars and above.
+
 Print the title and image URL of the 5 items with the highest number of reviews.
 
 ------------------------------------------------------------------------------------------------------------------------------------------
