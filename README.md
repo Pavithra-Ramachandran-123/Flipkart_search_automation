@@ -1,6 +1,6 @@
 Demo Recording : https://drive.google.com/file/d/1HEfVTeCNKp1p2UEc254l2ZPAOOQks6iL/view?usp=sharing
 
-# Flipkart Automation Project
+# Flipkart Search Automation Project
 
 This project automates the Flipkart website to extract information about various products based on different criteria. We perform searches for specific items, filter them based on ratings or discounts, and then extract details such as product titles, prices, and reviews.
 
