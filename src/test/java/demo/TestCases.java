@@ -8,22 +8,22 @@ import java.util.logging.Level;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class TestCases {
     ChromeDriver driver;
-    
+    WebElement searchBox;
+    WebDriverWait wait;
     String url="http://www.flipkart.com";
     /*
      * TODO: Write your tests here with testng @Test annotation. 
@@ -31,20 +31,20 @@ public class TestCases {
      */
     @Test
     public void testCase01() throws InterruptedException{
-        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
+        //WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
         System.out.println("start of testCase01");
-        driver.get("http://www.flipkart.com/");
-        WebElement searchBox= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='text']")));
+        //driver.get("http://www.flipkart.com/");
+        //WebElement searchBox= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='text']")));
         searchBox.sendKeys("Washing Machine");
         searchBox.sendKeys(Keys.ENTER);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='text']")));
+        //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='text']")));
         //System.out.println(searchBox.getDomAttribute("value").contains("Washing Machine"));
         // Actions actions = new Actions(driver);
         // actions.sendKeys(searchBox, "iPhone").sendKeys(Keys.ENTER).build().perform();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='Popularity']")));
         WebElement popularitySort= wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='Popularity']")));
         popularitySort.click();
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
         List<WebElement> productRatings=wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@class='_75nlfW']")));
         int sumOfPdtwithLessThanFourRating=0;
         for(WebElement pr:productRatings){
@@ -60,23 +60,40 @@ public class TestCases {
         }
         System.out.println("Count of Products with rating <= 4 : "+sumOfPdtwithLessThanFourRating);
         System.out.println("end of testCase01");
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
     }
 
     @Test
     public void testCase02() throws InterruptedException{
-        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
+        //WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
         System.out.println("start of testCase02");
-        driver.get("http://www.flipkart.com/");
-        driver.navigate().refresh();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='text']")));
-        WebElement searchBox= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='text']")));
+        //driver.get("http://www.flipkart.com/");
+        //Thread.sleep(50000);
+        //driver.navigate().refresh();
+//        try {
+//            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@role='button']")));
+//            WebElement cross=driver.findElement(By.xpath("//span[@role='button']"));
+//            if(cross.isDisplayed()){
+//                System.out.println("cross present");
+//                cross.click();
+//            }
+//        }
+//        //<span role="button" class="_30XB9F">✕</span>
+//        catch (NoSuchElementException e) {
+//            System.out.println("No such element is present");
+//        }
+//        catch (TimeoutException e) {
+//            System.out.println("Timout in searching for cross");
+//        }
+        
+        //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='text']")));
+        //WebElement searchBox= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='text']")));
         searchBox.sendKeys("iPhone");
         searchBox.sendKeys(Keys.ENTER);
         //System.out.println(searchBox.getDomAttribute("value").contains("iphone"));
         // Actions actions = new Actions(driver);
         // actions.sendKeys(searchBox, "iPhone").sendKeys(Keys.ENTER).build().perform();
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@class='_75nlfW']")));
+        //wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@class='_75nlfW']")));
         List<WebElement> productList=wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@class='_75nlfW']")));
         Thread.sleep(1000);
         for(WebElement pr:productList){
@@ -88,28 +105,47 @@ public class TestCases {
                 System.out.println(productTitle.getText()+" "+discountPercentage.getText());
             }
         }
-        Thread.sleep(1000);
+        //Thread.sleep(1000);
         System.out.println("end of testCase02");
     }
 
     @Test
     public void testCase03() throws InterruptedException{
-        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
+        //WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
         System.out.println("start of testCase03");
-        driver.get("http://www.flipkart.com/");
-        driver.navigate().refresh();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='text']")));
-        WebElement searchBox= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='text']")));
+        // driver.get("http://www.flipkart.com/");
+        // //driver.navigate().refresh();
+        // try {
+        //     wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@role='button']")));
+        //     WebElement cross=driver.findElement(By.xpath("//span[@role='button']"));
+        //     if(cross.isDisplayed()){
+        //         System.out.println("cross present");
+        //         cross.click();
+        //     }
+        // } 
+        // catch (NoSuchElementException e) {
+        //     System.out.println("No such element is present");
+        // }
+        // catch (TimeoutException e) {
+        //     System.out.println("Timout in searching for cross");
+        // }
+        //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='text']")));
+        //Thread.sleep(5000);
+//        WebElement searchBox= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='text']")));
+//        //searchBox.clear();
+//        searchBox.sendKeys(Keys.CONTROL + "a");
+//        searchBox.sendKeys(Keys.BACK_SPACE);
         searchBox.sendKeys("Coffee Mug");
         searchBox.sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
         //System.out.println(searchBox.getDomAttribute("value").contains("Coffee Mug"));
         // Actions actions = new Actions(driver);
         // actions.sendKeys(searchBox, "iPhone").sendKeys(Keys.ENTER).build().perform();
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='4★ & above']")));
-        WebElement fournAboveFilter= wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='4★ & above']")));
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[text()='4★ & above']")));
+        WebElement fournAboveFilter= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),\"4\")]")));
         fournAboveFilter.click();
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         // List<WebElement> productList=wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.className("wjcEIp")));
     
         // for(int i=1;i<=5;i++){
@@ -122,13 +158,13 @@ public class TestCases {
         //     System.out.println("Product Image url : "+url+imgUrl+"\n");
         // }
         // System.out.println("end of testCase03");
-
+        //wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(".slAVV4")));
         List<WebElement> productElements = driver.findElements(By.cssSelector(".slAVV4"));
 
             // Create a list to hold product info
             List<Product> products = new ArrayList<>();
 
-            // Iterate through each product element
+            // Iterate through each product elementbh
             for (WebElement productElement : productElements) {
                 
                     String title = productElement.findElement(By.cssSelector("a.wjcEIp")).getDomAttribute("title");
@@ -137,6 +173,7 @@ public class TestCases {
                     String imageUrl = productElement.findElement(By.cssSelector("img.DByuf4")).getDomAttribute("src");
 
                     // Get the number of reviews
+                    //wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".Wphh3N")));
                     String reviewsText = productElement.findElement(By.cssSelector(".Wphh3N")).getText();
                     int reviewsCount = Integer.parseInt(reviewsText.replaceAll("[^0-9]", ""));
 
@@ -154,14 +191,14 @@ public class TestCases {
                 System.out.println("Reviews: " + product.getReviews());
                 System.out.println("---------------");
             }
-            Thread.sleep(1000);
+            //Thread.sleep(1000);
             
     }
      
     /*
      * Do not change the provided methods unless necessary, they will help in automation and assessment
      */
-    @BeforeTest
+    @BeforeClass
     public void startBrowser()
     {
         System.setProperty("java.util.logging.config.file", "logging.properties");
@@ -182,11 +219,23 @@ public class TestCases {
         driver = new ChromeDriver(options);
 
         driver.manage().window().maximize();
-        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait=new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.get("http://www.flipkart.com/");
+        searchBox= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='text']")));
         
     }
 
-    @AfterTest
+    @BeforeMethod
+    public void clearSearchBox() throws InterruptedException {
+        //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='text']")));
+        searchBox= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='text']")));
+        //Thread.sleep(2000);
+        //searchBox.clear();
+        searchBox.sendKeys(Keys.CONTROL + "a");
+        searchBox.sendKeys(Keys.BACK_SPACE);
+    }
+
+    @AfterClass
     public void endTest()
     {
         driver.close();
